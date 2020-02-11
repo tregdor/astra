@@ -19,11 +19,9 @@ const classes = {
 };
 
 const TaskBoard = ({classes,tasks,onCompleteTask,...rest}) => {
-  const tasksItems = tasks.map((item,id) => {
-    if(id > 2){
-      return;
-    }
-    return <Task key={id}  data={item} id={id} onCompleteTask={onCompleteTask}/>
+  const tasksItems = tasks.map((item) => {
+
+    return <Task key={item.id}  data={item} id={item.id} onCompleteTask={onCompleteTask}/>
   });
   console.log(tasks);
   return (

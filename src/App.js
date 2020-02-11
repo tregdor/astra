@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 import sideBg from "./components/images/side-bg.jpg";
 import './index.css';
 import MainBlock from "./components/main/MainBlock";
-import {mainQueries} from "./components/helperFuncrions";
+import {createId, mainQueries} from "./components/helperFuncrions";
 
 const classes = {
   root: {
@@ -25,14 +25,18 @@ const App = ({classes, ...rest}) => {
   if (!responseIsOk) {
     mainQueries.getData().then((response) => {
       if (response.status === 200) {
-        setTasks(response.data.tasks);
+        setTasks(response.data.tasks.map(task => ({
+          id: createId(),
+          type: task.type,
+          progress: task.progress
+        })));
         setEndsAt(response.data.endsAt);
         setResponseIsOk(true);
       }
     });
   }
   const onCompleteTask = (id) => {
-    setTasks(tasks.filter((item,idx) => idx !== id))
+    setTasks(tasks.filter((item) => item.id !== id))
   };
   return (
     <div className={ classes.root }>

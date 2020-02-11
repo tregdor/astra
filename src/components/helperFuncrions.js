@@ -40,3 +40,10 @@ export const calcRestTime = (time) => {
   }
   return res
 };
+
+
+let countId = 0;
+
+export const  createId = () => {
+  return countId++
+};
